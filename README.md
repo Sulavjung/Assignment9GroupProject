@@ -1,4 +1,107 @@
+#### 1. Consider two binary trees, one that has 3 levels and the other that has 10 levels.. Answer the following questions:
+#### a. What is the maximum number of nodes in this tree? 
+Ans: Maximum number of nodes in a 3-level tree and 10-level tree are: 
+- 3 levels = $2^3 -1 =7$ maximum nodes. 
+- 10 levels = $2^{10} -1 = 1032$ maximum nodes. 
+#### b. What is the maximum number of leaves in this tree? 
+Ans: Maximum number of leaves in 3 level tree and 10-level tree are: 
+- 3 levels = $2^{3-1} = 4$ is the maximum number of leaves. 
+- 10 levels = $2^{10-1} = 512$ is the maximum number of leaves. 
 
+---
+#### 2. Write a recursive algorithm, that counts the nodes in a binary tree. Only Pseudo Code is required, along the lines of the format on slide 20 of the class presentation 
+Ans: 
+```js
+Algorithm countNodes(root)
+    if root is null then
+        return 0
+    else
+	    //1 for the current node. 
+        return 1 + countNodes(left subtree of root) + countNodes(right subtree of root)
+```
+---
+#### 3. Suppose we know the preorder traversal of a binary search tree is as follows: 
+#### 6 2 1 4 3 7 10 9 11
+#### Show postorder traversal for the same tree 
+Ans: 
+To find the postorder traversal of the given binary search tree, we first need to construct the tree from its preorder traversal. 
+
+The preorder traversal indicates that the root of the tree is 6, the left subtree consists of values smaller than 6, and the right subtree consists of values larger than 6. 
+
+The first value in the traversal after 6 is 2, which must be the left child of 6. The next value, 1, must be the left child of 2. The value 4 must be the right child of 2, and 3 must be the left child of 4.
+
+Next, we encounter the value 7, which must be the right child of 6. The value 10 must be the right child of 7, and 9 must be the left child of 10. Finally, the value 11 must be the right child of 10.
+
+So, the constructed binary search tree is:
+
+```js
+         6
+       /   \
+      2     7
+     / \     \
+    1   4    10
+       /     / \
+      3     9   11
+```
+
+To find the postorder traversal, we visit the left subtree, then the right subtree, and finally the root. So the postorder traversal for the above tree is:
+
+```js
+1 3 4 2 9 11 10 7 6
+```
+---
+#### 4. Write an interface GeneralTreeInterface for a general tree, along the lines of Slide 13, with interface for a binary tree. 
+Ans: 
+```js
+//Interface for a binary tree. 
+public interface generalTreeInterface<T> extends treeInterface<T>, treeIteratorInterface<T> {
+
+public void setRootData(T rootData);
+
+public boolean addChild(T subtreeRootData);
+
+public boolean removeChild(T subtreeRootData);
+
+public Iterator<T> getChild(T nodeData);
+
+public boolean isLeaf(T nodeData);
+
+}
+```
+
+---
+#### 5. Trace the addition of each of the following values to an initially empty maxheap: 
+#### 10 20 30 40 50
+#### Be sure to draw the progressive buildout of the heap after insertion of each of the above element
+Ans: 
+![ADT Trees](./ADTTree3.png)
+
+
+---
+#### 6. Trace the formation of a maxheap by the constructor given in Segment 27.16 for each of the following arrays:
+#### (a) 10  20  30  40  50
+Ans: 
+When we pass this as array in the Max heap constructor. It then creates the heap with the for loop like this: 
+
+| null | 10  | 20  | 30  | 40  | 50  |
+| ---- | --- | --- | --- | --- | --- |
+
+Then the constructor call the reheap function for the parent indexes only. Thus, creating the resulting Max Heap like this: 
+
+| null | 50  | 40  | 30  | 10  | 20  |
+| ---- | --- | --- | --- | --- | --- |
+
+
+#### (b) 10  20  30  40  50  60  70  80  90  100[5pts]
+Ans: When we pass this as array in the max heap constructor. It then creates the heap with the for loop like this: 
+| null | 10  | 20  | 30  | 40  | 50  | 60  | 70  | 80  | 90  | 100 |
+| ---- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+
+Then the constructor call the reheap function for the parent indexes only. Thus, creating the resulting Max Heap like this: 
+| null | 100 | 90  | 70  | 80  | 50  | 60  | 30  | 10  | 40  | 20  |
+| ---- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+
+---
 #### 7. Consider the following integers. 
 | 6   | 12  | 2   | 77  | 54  | 43  | 80  | 100 | 31  | 67  |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -174,3 +277,40 @@ public class MinHeapTest {
 
 }
 ```
+
+---
+#### 9. Consider a traversal of a binary tree and suppose that visiting a node means to simply display the data in the node. What are the results of each of the following traversals of the tree in Figure below
+#### (a) Pre-order
+$$
+\large 14 \to 62 \to 7 \to 6 \to 14 \to 2 \to 8 \to 41 \to 52 \to 91 \to 5
+$$
+#### (b) Post-order
+$$
+\large 6 \to 14 \to 7 \to 2 \to 62 \to 52 \to 41 \to 5 \to 91 \to 8 \to 14
+$$
+#### (c) In-order 
+$$
+\large 6 \to 7 \to 14 \to 62 \to 2 \to 14 \to 41 \to 8 \to 52 \to 91 \to 5
+$$
+#### (d) Level-order
+$$
+\large 14 \to 62 \to 8 \to 7 \to 2 \to 41 \to 91 \to 6 \to 14 \to 52 \to 5
+$$
+
+OR: 
+
+#### a) Pre-order
+| 14  | 62  | 7   | 6   | 14  | 2   | 8   | 41  | 52  | 91  | 5   |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+
+#### b) Post-order
+| 6 | 14 | 7 | 2 | 62 | 52 | 41 | 5 | 91 | 8 | 14 |
+| - | -- | - | - | -- | -- | -- | - | -- | - | -- |
+
+#### c) In-order
+| 6 | 7 | 14 | 62 | 2 | 14 | 41 | 8 | 52 | 91 | 5 |
+| - | - | -- | -- | - | -- | -- | - | -- | -- | - |
+
+#### d) Level-order
+ | 14 | 62 | 8 | 7 | 2 | 41 | 91 | 6 | 14 | 52 | 5 |
+ | -- | -- | - | - | - | -- | -- | - | -- | -- | - |
